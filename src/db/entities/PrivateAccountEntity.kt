@@ -2,7 +2,10 @@ package db.entities
 
 import java.io.Serializable
 import java.time.LocalDate
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity(name = "private_accounts")
 @Table(name="private_accounts", schema = "account_service")
@@ -22,4 +25,5 @@ class PrivateAccountEntity(
     val balance: Double = 1.1,
     @Column(name="updatedat")
     val updatedAt: LocalDate? = null
-) : Serializable
+) : Serializable {
+}

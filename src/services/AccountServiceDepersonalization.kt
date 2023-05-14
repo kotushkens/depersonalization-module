@@ -1,17 +1,14 @@
 package services
 
-import db.entities.PrivateAccountEntity
 import repositories.PrivateAccountRepositoryImpl
 
 class AccountServiceDepersonalization(
     private val privateAccountRepository: PrivateAccountRepositoryImpl,
-    private val depersonalizationService: DepersonalizationService,
+    private val depersonalizationService: DepersonalizationServiceImpl,
     ) {
 
-
-    fun depersonalizePrivateAccounts(): Collection<PrivateAccountEntity> {
-        depersonalizationService.depersonalizeAccs(privateAccountRepository.getAll())
-        return privateAccountRepository.getAll()
+    fun depersonalizePrivateAccounts(): MutableMap<String, MutableList<String>> {
+        return depersonalizationService.depersonalizePrivateAccounts(privateAccountRepository.getAll())
     }
 
 }

@@ -25,6 +25,9 @@ dependencies {
     val h2Version = "2.1.214"
     val jacksonVersion = "2.14.2"
 
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-common
+    implementation(kotlin("stdlib"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-common:1.8.10")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.10")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("ch.qos.logback:logback-classic:1.4.6")
