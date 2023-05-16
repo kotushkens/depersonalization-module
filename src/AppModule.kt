@@ -8,7 +8,9 @@ import repositories.JPA.createSessionFactory
 import repositories.PrivateAccountRepository
 import repositories.PrivateCustomerRepository
 import services.AccountServiceDepersonalization
+import services.DepersonalizationRulesService
 import services.DepersonalizationServiceImpl
+import utils.Random
 
 private val DEPERSONALISED = StringQualifier("depersonalised")
 
@@ -22,13 +24,13 @@ val appModule = module {
 
     single(DEPERSONALISED) { HibernateRepository(createSessionFactory(ConnectionPool(get<Config>().destinationDbConfig.connectionConfig).dataSource, "db.entities")) }
 
-    single { DepersonalizationServiceImpl(get(DEPERSONALISED)) }
+    single { DepersonalizationRulesService(get()) }
+    single { DepersonalizationServiceImpl(get(), get(DEPERSONALISED), get()) }
 
 
     single { PrivateAccountRepository(get()) }
     single { PrivateCustomerRepository(get()) }
     single { AccountServiceDepersonalization(get(), get(), get()) }
 
-
-
+    single { Random() }
 }

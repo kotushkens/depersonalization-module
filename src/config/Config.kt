@@ -17,7 +17,7 @@ class ConfigImpl(
 
     override val name: String = "depersonalization-module"
 
-    override val specificFormats: Collection<String> = loadProperties("depersonalization").asMap.values
+    override val specificFormats: Collection<String> = loadProperties("depersonalization").asMap.filter { it.value.equals("true") }.keys
 
     override val accountServiceDbConfig = DatabaseConfigImpl("ACCOUNT_SERVICE", getEnv)
 
