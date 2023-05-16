@@ -3,11 +3,9 @@ package repositories
 import db.entities.PrivateAccountEntity
 import kotlinx.coroutines.runBlocking
 
-interface DepersonalisationRepository {
-}
-class PrivateAccountRepositoryImpl(
+class PrivateAccountRepository(
     private val repository: HibernateRepository,
-) : DepersonalisationRepository {
+) {
 
     fun getAll(): Collection<PrivateAccountEntity> = runBlocking {
         repository.withTransaction {

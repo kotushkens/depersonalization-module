@@ -1,26 +1,33 @@
 
 import config.Config
 import config.ConfigImpl
+import org.koin.core.qualifier.StringQualifier
 import org.koin.dsl.module
 import repositories.HibernateRepository
 import repositories.JPA.createSessionFactory
-import repositories.PrivateAccountRepositoryImpl
+import repositories.PrivateAccountRepository
+import repositories.PrivateCustomerRepository
 import services.AccountServiceDepersonalization
 import services.DepersonalizationServiceImpl
+
+private val DEPERSONALISED = StringQualifier("depersonalised")
 
 val appModule = module {
     single<Config> {
         ConfigImpl(getEnv = System::getenv)
     }
 
-    single { ConnectionPool(get<Config>().accountServiceDbConfig.connectionConfig).dataSource }
-    single { createSessionFactory(get(), "db.entities") } //todo: create datasource
-    single { HibernateRepository(get()) }
-    single { DepersonalizationServiceImpl() }
+
+    single { HibernateRepository(createSessionFactory(ConnectionPool(get<Config>().accountServiceDbConfig.connectionConfig).dataSource , "db.entities")) }
+
+    single(DEPERSONALISED) { HibernateRepository(createSessionFactory(ConnectionPool(get<Config>().destinationDbConfig.connectionConfig).dataSource, "db.entities")) }
+
+    single { DepersonalizationServiceImpl(get(DEPERSONALISED)) }
 
 
-    single { PrivateAccountRepositoryImpl(get()) }
-    single { AccountServiceDepersonalization(get(), get()) }
+    single { PrivateAccountRepository(get()) }
+    single { PrivateCustomerRepository(get()) }
+    single { AccountServiceDepersonalization(get(), get(), get()) }
 
 
 

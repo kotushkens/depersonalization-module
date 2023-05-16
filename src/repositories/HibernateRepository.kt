@@ -1,6 +1,5 @@
 package repositories
 
-import db.entities.PrivateAccountEntity
 import exceptions.NotFoundException
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext

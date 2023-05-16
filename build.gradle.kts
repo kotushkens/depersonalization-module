@@ -42,6 +42,8 @@ dependencies {
     implementation("com.vladmihalcea:hibernate-types-52:2.21.1")
     implementation("com.h2database:h2:$h2Version")
     implementation("com.google.guava:guava:31.1-jre")
+    implementation("com.google.code.gson:gson:2.10.1")
+
     runtimeOnly("org.postgresql:postgresql:42.5.4")
 
     testImplementation("org.assertj:assertj-core:3.24.2")

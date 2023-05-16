@@ -6,5 +6,6 @@ class Application(
 
     fun start() {
         accountServiceDepersonalization.depersonalizePrivateAccounts()
+        accountServiceDepersonalization.depersonalizePrivateCustomers()
     }
 }

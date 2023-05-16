@@ -1,14 +1,20 @@
 package services
 
-import repositories.PrivateAccountRepositoryImpl
+import repositories.PrivateAccountRepository
+import repositories.PrivateCustomerRepository
 
 class AccountServiceDepersonalization(
-    private val privateAccountRepository: PrivateAccountRepositoryImpl,
+    private val privateAccountRepository: PrivateAccountRepository,
+    private val privateCustomerRepository: PrivateCustomerRepository,
     private val depersonalizationService: DepersonalizationServiceImpl,
     ) {
 
-    fun depersonalizePrivateAccounts(): MutableMap<String, MutableList<String>> {
-        return depersonalizationService.depersonalizePrivateAccounts(privateAccountRepository.getAll())
+    fun depersonalizePrivateAccounts() {
+      depersonalizationService.depersonalizePrivateAccounts(privateAccountRepository.getAll())
+    }
+
+    fun depersonalizePrivateCustomers() {
+      depersonalizationService.depersonalizePrivateCustomers(privateCustomerRepository.getAll())
     }
 
 }
