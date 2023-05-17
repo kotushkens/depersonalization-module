@@ -1,4 +1,4 @@
-### Bachelor Thesis (2023) - Development of a module for data depersonalization in the banking environment
+### Bachelor Thesis (2023) - Development of a Module for Data Depersonalization in the Banking Environment
 It can be configured via ```depersonalization.properties``` and contains rules of depersonalization process for anonymization of data from source account-service database to destination database.
 
 Environment variables to start:
